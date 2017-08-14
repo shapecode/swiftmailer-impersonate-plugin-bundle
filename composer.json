@@ -1,0 +1,61 @@
+{
+    "name": "shapecode/swiftmailer-plugins-bundle",
+    "description": "Sets the from address for outgoing mails in swiftmailer",
+    "keywords": [
+        "swiftmailer",
+        "impersonate",
+        "from",
+        "plugin",
+        "plugins",
+        "shapecode",
+        "symfony",
+        "bundle"
+    ],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "homepage": "https://github.com/shapecode/swiftmailer-impersonate-plugin-bundle",
+    "support": {
+        "email": "support@shapeocode.de",
+        "issues": "https://github.com/shapecode/swiftmailer-impersonate-plugin-bundle/issues",
+        "source": "https://github.com/shapecode/swiftmailer-impersonate-plugin-bundle/releases",
+        "wiki": "https://github.com/shapecode/swiftmailer-impersonate-plugin-bundle/wiki"
+    },
+    "authors": [
+        {
+            "name": "Nikita Loges",
+            "homepage": "https://nikita-loges.de",
+            "email": "develop@nikita-loges.de"
+        }
+    ],
+    "require": {
+        "php": "~5.5|~7.0",
+
+        "symfony/framework-bundle": "~2.8|~3.0",
+        "symfony/dependency-injection": "~2.8|~3.0",
+        "symfony/http-kernel": "~2.8|~3.0",
+        "symfony/config": "~2.8|~3.0",
+        "symfony/swiftmailer-bundle": "~2.3|~3.0",
+
+        "shapecode/swiftmailer-plugins": "~1.0"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "~2.8|~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Shapecode\\Bundle\\SwiftmailerPluginsBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shapecode\\Bundle\\SwiftmailerPluginsBundle\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
