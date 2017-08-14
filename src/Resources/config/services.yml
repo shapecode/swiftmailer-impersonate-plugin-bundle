@@ -1,0 +1,5 @@
+services:
+    shapecode_swiftmailer_plugins.impersonate:
+        class: Shapecode\Swiftmailer\Plugins\ImpersonatePlugin
+        abtract: true
+        public: false
