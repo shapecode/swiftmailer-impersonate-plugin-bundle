@@ -3,3 +3,9 @@ services:
         class: Shapecode\Swiftmailer\Plugins\ImpersonatePlugin
         abtract: true
         public: false
+
+    shapecode_swiftmailer_plugins.symfony_event_dispatcher:
+        class: Shapecode\Bundle\SwiftmailerPluginsBundle\Plugin\SymfonyEventDispatcherPlugin
+        arguments: ['@event_dispatcher']
+        abtract: true
+        public: false

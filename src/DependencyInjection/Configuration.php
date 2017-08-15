@@ -11,7 +11,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * @package Shapecode\Bundle\SwiftmailerPluginsBundle\DependencyInjection
  * @author  Nikita Loges
- * @company tenolo GbR
  */
 class Configuration implements ConfigurationInterface
 {

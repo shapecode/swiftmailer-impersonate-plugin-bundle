@@ -13,7 +13,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
  *
  * @package Shapecode\Bundle\SwiftmailerPluginsBundle\DependencyInjection
  * @author  Nikita Loges
- * @company tenolo GbR
  */
 class ShapecodeSwiftmailerPluginsExtension extends ConfigurableExtension
 {
@@ -25,36 +24,41 @@ class ShapecodeSwiftmailerPluginsExtension extends ConfigurableExtension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
-        foreach ($config['mailers'] as $name => $mailer) {
-            $this->configureMailer($name, $mailer, $container);
+        $swiftMailers = $container->getParameter('swiftmailer.mailers');
+
+        foreach ($swiftMailers as $name => $fullName) {
+            $this->configureMailer($name, $config['mailers'], $container);
         }
     }
 
     /**
      * @param string           $name      The mailer name
-     * @param array            $mailer    The mailer configuration
+     * @param array            $config    The mailer configuration
      * @param ContainerBuilder $container The container builder
      */
-    protected function configureMailer($name, array $mailer, ContainerBuilder $container)
+    protected function configureMailer($name, array $config, ContainerBuilder $container)
     {
-        $this->configureMailerFromAddress($name, $mailer, $container);
+        $mailerConfig = (isset($config[$name])) ? $config[$name] : [];
+
+        $this->configureMailerFromAddress($name, $mailerConfig, $container);
+        $this->configureEventDispatcher($name, $container);
     }
 
     /**
      * @param string           $name      The mailer name
-     * @param array            $mailer    The mailer configuration
+     * @param array            $config    The mailer configuration
      * @param ContainerBuilder $container The container builder
      */
-    protected function configureMailerFromAddress($name, array $mailer, ContainerBuilder $container)
+    protected function configureMailerFromAddress($name, array $config, ContainerBuilder $container)
     {
-        if (!empty($mailer['from_address'])) {
+        if (!empty($config['from_address'])) {
             $container->setParameter(
                 sprintf('shapecode_swiftmailer_plugins.mailer.%s.impersonate.from_address', $name),
-                !empty($mailer['from_address']) ? $mailer['from_address'] : null
+                !empty($config['from_address']) ? $config['from_address'] : null
             );
             $container->setParameter(
                 sprintf('shapecode_swiftmailer_plugins.mailer.%s.impersonate.from_name', $name),
-                !empty($mailer['from_name']) ? $mailer['from_name'] : null
+                !empty($config['from_name']) ? $config['from_name'] : null
             );
 
             $definitionDecorator = new DefinitionDecorator(
@@ -75,6 +79,21 @@ class ShapecodeSwiftmailerPluginsExtension extends ConfigurableExtension
                 ->getDefinition(sprintf('shapecode_swiftmailer_plugins.mailer.%s.plugin.impersonate', $name))
                 ->addTag(sprintf('swiftmailer.%s.plugin', $name));
         }
+    }
+
+    /**
+     * @param string           $name      The mailer name
+     * @param ContainerBuilder $container The container builder
+     */
+    protected function configureEventDispatcher($name, ContainerBuilder $container)
+    {
+        $definitionDecorator = new DefinitionDecorator('shapecode_swiftmailer_plugins.symfony_event_dispatcher');
+
+        $definitionName = sprintf('shapecode_swiftmailer_plugins.mailer.%s.plugin.symfony_event_dispatcher', $name);
+        $tagName = sprintf('swiftmailer.%s.plugin', $name);
+
+        $newDefinition = $container->setDefinition($definitionName, $definitionDecorator);
+        $newDefinition->addTag($tagName);
     }
 
 }

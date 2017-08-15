@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @package Shapecode\Bundle\SwiftmailerPluginsBundle
  * @author  Nikita Loges
- * @company tenolo GbR
  */
 class ShapecodeSwiftmailerPluginsBundle extends Bundle
 {
