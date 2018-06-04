@@ -28,28 +28,20 @@
         }
     ],
     "require": {
-        "php": "~5.5|~7.0",
+        "php": "~5.6|~7.0",
 
-        "symfony/framework-bundle": "~2.8|~3.0",
-        "symfony/dependency-injection": "~2.8|~3.0",
-        "symfony/http-kernel": "~2.8|~3.0",
-        "symfony/config": "~2.8|~3.0",
-        "symfony/event-dispatcher": "~2.8|~3.0",
+        "symfony/framework-bundle": "~2.8|~3.0|~4.0",
+        "symfony/dependency-injection": "~2.8|~3.0|~4.0",
+        "symfony/http-kernel": "~2.8|~3.0|~4.0",
+        "symfony/config": "~2.8|~3.0|~4.0",
+        "symfony/event-dispatcher": "~2.8|~3.0|~4.0",
         "symfony/swiftmailer-bundle": "~2.3|~3.0",
 
         "shapecode/swiftmailer-plugins": "~1.0"
     },
-    "require-dev": {
-        "symfony/phpunit-bridge": "~2.8|~3.0"
-    },
     "autoload": {
         "psr-4": {
             "Shapecode\\Bundle\\SwiftmailerPluginsBundle\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Shapecode\\Bundle\\SwiftmailerPluginsBundle\\Tests\\": "tests/"
         }
     },
     "extra": {
